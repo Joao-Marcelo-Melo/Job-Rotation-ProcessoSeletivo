@@ -6,13 +6,13 @@ function fibonacci(QuantidadeValores) {
     let atual = 1;
     let proximo = 1;
 
-    for (let i = 0; i < QuantidadeValores; i++){ // executa loop para formar a sequência fibonacci;
+    for (let i = 0; i < QuantidadeValores; i++) { // executa loop para formar a sequência fibonacci;
         console.log(proximo)
         anterior = atual + proximo
         atual = proximo
         proximo = anterior
 
-        if (QuantidadeValores == atual){ // avisa se o valor digitado pertence a sequência;
+        if (QuantidadeValores == atual) { // avisa se o valor digitado pertence a sequência;
             console.log('pertence a sequência')
         }
     }
@@ -20,38 +20,190 @@ function fibonacci(QuantidadeValores) {
 fibonacci(3) // Valor informado por meio do parametro da funçãoo 'fibonacci';
 
 // --------------------Questão 3-----------------------//
-let ValorFaturamento = { // faturamento mensal informado por um objeto JavaScript JSON;
-    faturamentoMensalDiasConsecutivos: [
-        3740, 4914, 941, 559, 3780, 0, 0, 1142, 190, 4237,
-        2379, 4240, 0, 0, 2964, 1202, 3035, 1689, 3012, 0,
-        0, 3835, 4628, 4744, 3474, 0, 0, 1942, 4134, 3620,
-
+let ValorFaturamento = {
+    valorTotalMensal: [
+        {
+            "dia": 1,
+            "valor": 22174.1664
+        },
+        {
+            "dia": 2,
+            "valor": 24537.6698
+        },
+        {
+            "dia": 3,
+            "valor": 26139.6134
+        },
+        {
+            "dia": 4,
+            "valor": 0.0
+        },
+        {
+            "dia": 5,
+            "valor": 0.0
+        },
+        {
+            "dia": 6,
+            "valor": 26742.6612
+        },
+        {
+            "dia": 7,
+            "valor": 0.0
+        },
+        {
+            "dia": 8,
+            "valor": 42889.2258
+        },
+        {
+            "dia": 9,
+            "valor": 46251.174
+        },
+        {
+            "dia": 10,
+            "valor": 11191.4722
+        },
+        {
+            "dia": 11,
+            "valor": 0.0
+        },
+        {
+            "dia": 12,
+            "valor": 0.0
+        },
+        {
+            "dia": 13,
+            "valor": 3847.4823
+        },
+        {
+            "dia": 14,
+            "valor": 373.7838
+        },
+        {
+            "dia": 15,
+            "valor": 2659.7563
+        },
+        {
+            "dia": 16,
+            "valor": 48924.2448
+        },
+        {
+            "dia": 17,
+            "valor": 18419.2614
+        },
+        {
+            "dia": 18,
+            "valor": 0.0
+        },
+        {
+            "dia": 19,
+            "valor": 0.0
+        },
+        {
+            "dia": 20,
+            "valor": 35240.1826
+        },
+        {
+            "dia": 21,
+            "valor": 43829.1667
+        },
+        {
+            "dia": 22,
+            "valor": 18235.6852
+        },
+        {
+            "dia": 23,
+            "valor": 4355.0662
+        },
+        {
+            "dia": 24,
+            "valor": 13327.1025
+        },
+        {
+            "dia": 25,
+            "valor": 0.0
+        },
+        {
+            "dia": 26,
+            "valor": 0.0
+        },
+        {
+            "dia": 27,
+            "valor": 25681.8318
+        },
+        {
+            "dia": 28,
+            "valor": 1718.1221
+        },
+        {
+            "dia": 29,
+            "valor": 13220.495
+        },
+        {
+            "dia": 30,
+            "valor": 8414.61
+        }
     ]
 }
 
-function MenorValorDeFaturamento(array) { // Função para informar menor valor != 0 da array 'faturamentoMensalDiasConsecutivos';
-    const ArraySemZero = array.filter(array => array  !== 0) // criação de nova array sem zero;
-    return Math.min.apply(null, ArraySemZero)
-}
+function MenorValorDeFaturamento() {
+    const valorTotalMensal = ValorFaturamento.valorTotalMensal;
+    let valorMinimo = Infinity; // variável que armazenará o maior valor encontrado.
 
-function MaiorDiaDeFaturamento(array) { // Função para informar maior valor da array 'faturamentoMensalDiasConsecutivos';
-    return Math.max.apply(null, array)
-}
-
-function calcularMedia(array) { // Função para calcular média da array 'faturamentoMensalDiasConsecutivos';
-    let soma = 0;
-    const ArraySemZero = array.filter(array => array  !== 0)  // criação de nova array sem zero;
-    for (let i = 0; i < ArraySemZero.length; i++) {
-      soma += ArraySemZero[i];
+    // Encontra o valor mínimo
+    for (let i = 0; i < valorTotalMensal.length; i++) {
+        const valor = valorTotalMensal[i].valor;
+        if (valor < valorMinimo && valor !== 0) {
+            valorMinimo = valor;
+        }
     }
-    const media = soma / ArraySemZero.length; // Calculo da média
-    return media;
-  }
 
-console.log(MaiorDiaDeFaturamento(ValorFaturamento.faturamentoMensalDiasConsecutivos))
-console.log(MenorValorDeFaturamento(ValorFaturamento.faturamentoMensalDiasConsecutivos))
-const media = calcularMedia(ValorFaturamento.faturamentoMensalDiasConsecutivos)
-console.log(media.toFixed(2))
+    // Imprime o valor mínimo diferente de 0
+    for (let i = 0; i < valorTotalMensal.length; i++) {
+        const dia = valorTotalMensal[i].dia;
+        const valor = valorTotalMensal[i].valor;
+        if (valor === valorMinimo && valor !== 0) {
+            console.log(`O Valor mínimo foi encontrado no dia: ${dia} com o Valor de: ${valor.toFixed(2)}`);
+        }
+    }
+}
+
+function MaiorValorDeFaturamento() {
+    let valorMaximo = 0; // variável que armazenará o maior valor encontrado. Inicialmente, é atribuído o valor zero.
+    let diaMaximo = 0; // variável que armazenará o dia correspondente ao maior valor encontrado. Inicialmente, é atribuído o valor zero.
+
+    // O loop percorre cada objeto dentro do array 'valorTotalMensal' de 'ValorFaturamento'
+    for (let i = 0; i < ValorFaturamento.valorTotalMensal.length; i++) {
+        const valorAtual = ValorFaturamento.valorTotalMensal[i].valor; // atribui o valor do objeto atual à variável 'valorAtual'
+        const diaAtual = ValorFaturamento.valorTotalMensal[i].dia; // atribui o dia do objeto atual à variável 'diaAtual'
+        if (valorAtual > valorMaximo) { // verifica se o valor do objeto atual é maior do que o maior valor já encontrado
+            valorMaximo = valorAtual; // atualiza o maior valor encontrado
+            diaMaximo = diaAtual; // atualiza o dia correspondente ao maior valor encontrado
+        }
+    }
+
+    // Imprime o resultado na tela.
+    console.log(`O valor máximo foi encontrado no dia ${diaMaximo} com o valor de ${valorMaximo.toFixed(2)}`);
+}
+
+function CalcularMedia() {
+    let somaValores = 0;
+    let numValores = 0;
+    
+    for (let i = 0; i < ValorFaturamento.valorTotalMensal.length; i++) {
+      if (ValorFaturamento.valorTotalMensal[i].valor !== 0) {
+        somaValores += ValorFaturamento.valorTotalMensal[i].valor;
+        numValores++;
+      }
+    }
+    
+    let mediaValores = somaValores / numValores;
+    console.log(`A média dos valores diferente de 0 é ${mediaValores.toFixed(2)}`)
+    
+}
+
+MenorValorDeFaturamento()
+MaiorValorDeFaturamento()
+CalcularMedia()
 
 
 // --------------------Questão 4-----------------------//
